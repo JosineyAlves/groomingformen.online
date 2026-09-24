@@ -486,6 +486,199 @@
         gap: 3px;
       }
     }
+    /* HABIT 10 - SUPPLEMENT PRODUCT */
+
+.supplement-habit {
+  align-items: flex-start;
+}
+
+.product-card {
+  margin-top: 25px;
+  padding: 26px;
+  border: 1px solid #e1e9e5;
+  border-radius: 20px;
+  background:
+    linear-gradient(
+      135deg,
+      #f8fbf9 0%,
+      #ffffff 60%
+    );
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 30px;
+  align-items: center;
+}
+
+.product-image-wrap {
+  background: #ffffff;
+  border: 1px solid #edf0ee;
+  border-radius: 17px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 250px;
+}
+
+.product-image {
+  width: 100%;
+  max-width: 175px;
+  height: 220px;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.04);
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.product-label {
+  display: inline-flex;
+  align-items: center;
+  background: var(--primary-soft);
+  color: var(--primary);
+  border-radius: 999px;
+  padding: 6px 11px;
+  margin-bottom: 11px;
+
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 1px;
+}
+
+.product-info h4 {
+  margin: 0 0 5px;
+  color: var(--text);
+  font-size: 22px;
+  line-height: 1.3;
+  letter-spacing: -0.4px;
+}
+
+.product-subtitle {
+  margin-bottom: 14px;
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.product-info p {
+  margin-bottom: 18px;
+  color: var(--text-soft);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.product-features {
+  width: 100%;
+  display: grid;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.product-feature {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #40514b;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.feature-check {
+  width: 21px;
+  height: 21px;
+  flex: 0 0 21px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+  background: var(--primary-soft);
+  color: var(--primary);
+
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.product-button {
+  min-height: 49px;
+  padding: 0 21px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+
+  border-radius: 12px;
+  background: var(--primary);
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  box-shadow: 0 10px 25px rgba(23, 107, 85, 0.18);
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.product-button:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(23, 107, 85, 0.24);
+}
+
+.button-arrow {
+  font-size: 18px;
+  transition: transform 0.2s ease;
+}
+
+.product-button:hover .button-arrow {
+  transform: translateX(3px);
+}
+
+.product-note {
+  display: block;
+  margin-top: 12px;
+  color: #89938f;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+
+/* PRODUCT RESPONSIVE */
+
+@media (max-width: 720px) {
+
+  .product-card {
+    grid-template-columns: 1fr;
+    padding: 20px;
+    gap: 22px;
+  }
+
+  .product-image-wrap {
+    min-height: 220px;
+  }
+
+  .product-image {
+    max-width: 165px;
+    height: 200px;
+  }
+
+  .product-button {
+    width: 100%;
+  }
+
+}
   </style>
 </head>
 
@@ -764,29 +957,86 @@
           </div>
         </article>
 
-        <!-- HABIT 10 -->
-        <article class="habit">
-          <div class="habit-number">10</div>
+ <!-- HABIT 10 -->
+<article class="habit supplement-habit">
+  <div class="habit-number">10</div>
 
-          <div class="habit-content">
-            <h3>Focus on Consistency, Not Perfection</h3>
+  <div class="habit-content">
+    <h3>Consider Nutritional Support</h3>
 
-            <p>
-              Healthy routines are easier to maintain when they can adapt to
-              real life. Missing a day doesn't erase your progress. What
-              matters most is creating habits you can return to again and
-              again.
-            </p>
+    <p>
+      A balanced diet, regular movement, quality sleep, and other healthy
+      lifestyle habits are the foundation of everyday well-being. Some people
+      also choose dietary supplements as an additional part of their wellness
+      routine.
+    </p>
 
-            <div class="simple-action">
-              <strong>Try this:</strong>
-              <span>
-                Choose one habit from this list and make it small enough to
-                repeat consistently for the next seven days.
-              </span>
-            </div>
+    <div class="product-card">
+
+      <div class="product-image-wrap">
+        <img
+          src="https://m.media-amazon.com/images/I/71wzoW-73nL._AC_SL1500_.jpg"
+          alt="Source Naturals Wellness Formula Advanced Immune Support - 240 Capsules"
+          class="product-image"
+        >
+      </div>
+
+      <div class="product-info">
+
+        <span class="product-label">WELLNESS PICK</span>
+
+        <h4>
+          Source Naturals Wellness Formula
+        </h4>
+
+        <div class="product-subtitle">
+          Advanced Immune Support • 240 Capsules
+        </div>
+
+        <p>
+          A Bio-Aligned Formula® featuring vitamin C plus more than 30
+          vitamins, minerals, and time-tested herbs formulated to provide
+          nutritional support for the immune system.
+        </p>
+
+        <div class="product-features">
+
+          <div class="product-feature">
+            <span class="feature-check">✓</span>
+            <span>High-potency Vitamin C</span>
           </div>
-        </article>
+
+          <div class="product-feature">
+            <span class="feature-check">✓</span>
+            <span>30+ vitamins, minerals &amp; herbs</span>
+          </div>
+
+          <div class="product-feature">
+            <span class="feature-check">✓</span>
+            <span>Advanced immune system support</span>
+          </div>
+
+        </div>
+
+        <a
+          href="https://www.amazon.com/gp/aw/d/B000GFSVI2"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="product-button"
+        >
+          View Product
+          <span class="button-arrow">→</span>
+        </a>
+
+        <span class="product-note">
+          Check the product label, ingredients, directions, and warnings before use.
+        </span>
+
+      </div>
+    </div>
+
+  </div>
+</article>
 
       </section>
 
