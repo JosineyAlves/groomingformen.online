@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Age Verification</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      background-color: #000000;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    .container {
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      gap: 30px;
+    }
+
+    .emoji {
+      font-size: 140px;
+      line-height: 1;
+      user-select: none;
+    }
+
+    h1 {
+      color: #ffffff;
+      font-size: 56px;
+      font-weight: 800;
+      text-align: center;
+      letter-spacing: -0.5px;
+    }
+
+    .yes-button {
+      background-color: #4CDB1E;
+      color: #ffffff;
+      font-size: 42px;
+      font-weight: 700;
+      padding: 18px 56px;
+      border: none;
+      border-radius: 14px;
+      text-decoration: none;
+      display: inline-block;
+      cursor: pointer;
+      transition: transform 0.15s ease, background-color 0.15s ease;
+      box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .yes-button:hover {
+      background-color: #3FC418;
+      transform: translateY(-2px);
+    }
+
+    .yes-button:active {
+      transform: translateY(1px);
+    }
+
+    @media (max-width: 600px) {
+      .emoji {
+        font-size: 90px;
+      }
+      h1 {
+        font-size: 32px;
+      }
+      .yes-button {
+        font-size: 30px;
+        padding: 14px 42px;
+      }
+    }
+  </style>
+  <script defer src="https://cdn.raadstag.com/tag.js" data-tag-id="12232-9d62c96606724425b5e0e51e57fcaf6c" data-event-host="api.raadstag.com" data-plat-params="utm_source,utm_medium,utm_term,utm_content,utm_campaign"></script>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5BL4XCNYZ4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5BL4XCNYZ4');
+</script>
+</head>
+<body class="cc" data-funnel="homefunnel">
+  <div class="container">
+    <div class="emoji">😈</div>
+    <h1>Are you over 21 years old?</h1>
+    <a href="https://groomingformen.online/vigjelly/lander/" class="yes-button">Yes</a>
+  </div>
+
+  <!-- Repassa os parametros da URL (affid, oid, uid, hid, utm_*) para os links -->
+  <script>
+    (function () {
+      var qs = location.search;
+      if (!qs) return;
+      var params = qs.slice(1);
+      var links = document.querySelectorAll('a[href]');
+      for (var i = 0; i < links.length; i++) {
+        var href = links[i].getAttribute('href');
+        if (/^(mailto:|tel:|#|javascript:)/i.test(href)) continue;
+        links[i].href += (links[i].href.indexOf('?') > -1 ? '&' : '?') + params;
+      }
+    })();
+  </script>
+</body>
+</html>
