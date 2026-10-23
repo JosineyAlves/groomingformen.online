@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Attention</title>
+
+    <!-- ============================================================
+         ⚙️  PAINEL DE CONFIGURAÇÃO — EDITE SÓ ESTAS LINHAS
+         ============================================================
+         1) Link do botão: fica direto no <a> do botão, procure por
+            "LINK DO BOTÃO" mais abaixo.
+         2) O embed da VSL fica no corpo da página, procure por
+            "TROCAR O EMBED DA VSL" mais abaixo.
+         ============================================================ -->
+    <script>
+        window.PAGE_CONFIG = {
+
+            /* --- opcional: só mexa se quiser --- */
+            SPOTS_START: 250, /* nº inicial de vagas */
+            SPOTS_FLOOR: 9, /* onde o contador para */
+            TAB_TITLES: ["📩 (1) Unread Message", "(1) Unread Message"]
+        };
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;800&family=Sora:wght@700&display=swap" rel="stylesheet">
+
+    <!-- se quiser favicon, suba o arquivo e descomente:
+    <link rel="icon" type="image/png" href="favicon.png"> -->
+
+    <style>
+        /* ------------------------------------------------------------------
+           Base
+           ------------------------------------------------------------------ */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #fff;
+            color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            font-size: 1rem;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        img,
+        video {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* ------------------------------------------------------------------
+           Barra vermelha de escassez (topo)
+           ------------------------------------------------------------------ */
+        .top-bar {
+            padding: 10px 15px;
+            background: #DC2626;
+            color: #fff;
+            font-family: "Inter", sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 20px;
+            text-align: center;
+        }
+
+        /* ------------------------------------------------------------------
+           Hero: headline + VSL + botão + aviso
+           ------------------------------------------------------------------ */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            padding: 40px 16px;
+            background: #000;
+        }
+
+        .hero__title {
+            margin: 0;
+            width: 100%;
+            color: #fff;
+            font-family: "Inter", sans-serif;
+            font-size: 30px;
+            font-weight: 800;
+            line-height: 41.25px;
+            text-align: center;
+        }
+
+        .hero__title .hl {
+            color: #FBBF24;
+        }
+
+        .hero__player {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .hero__warning {
+            margin: 0 0 20px;
+            width: 100%;
+            color: #fff;
+            font-family: "Sora", sans-serif;
+            font-size: 23px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* ------------------------------------------------------------------
+           CTA (sempre visível)
+           ------------------------------------------------------------------ */
+        /* o CTA vive dentro do .hero (flex com gap de 24px), entre o vídeo
+           e o aviso; com display:none o aviso sobe para baixo do vídeo */
+        .dtc-cta-wrap {
+            display: block;
+            width: 100%;
+            background: #000;
+        }
+
+        .dtc-cta {
+            padding: 0;
+            background: #000;
+            text-align: center;
+        }
+
+        .cta {
+            display: none;
+        }
+
+        .dtc-cta__button {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 620px;
+            min-height: 86px;
+            margin: 0 auto;
+            padding: 16px 20px;
+            overflow: hidden;
+            border-radius: 14px;
+            background: linear-gradient(180deg, #35d46f, #159c48);
+            color: #fff !important;
+            font-size: clamp(17px, 5.4vw, 32px);
+            font-weight: 900;
+            line-height: 1.12;
+            text-align: center;
+            text-decoration: none;
+            text-wrap: balance;
+            text-shadow: 0 2px 6px rgba(6, 68, 30, 0.35);
+            animation: ctaPulse 1.5s ease-in-out infinite;
+        }
+
+        .dtc-cta__button:hover,
+        .dtc-cta__button:focus-visible {
+            background: linear-gradient(180deg, #3ee07a, #17ac4f);
+            color: #fff !important;
+        }
+
+        /* o brilho é um filho para varrer o texto sem herdar o pulse */
+        .dtc-cta__button::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -60%;
+            width: 42%;
+            height: 100%;
+            background: linear-gradient(100deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-18deg);
+            animation: ctaSheen 3s ease-in-out infinite;
+        }
+
+        .dtc-cta__stock {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            margin: 16px 0 0;
+            color: #d92626;
+            font-size: clamp(20px, 5.2vw, 26px);
+            font-weight: 700;
+            letter-spacing: 0.01em;
+        }
+
+        /* inline-block para a animação funcionar e min-width fixo para
+           250 → 99 não deslocar a linha */
+        .dtc-cta__stock strong {
+            display: inline-block;
+            min-width: 2.1em;
+            color: #fbbf24;
+            font-size: 1.15em;
+            font-weight: 800;
+            font-variant-numeric: tabular-nums;
+            text-align: center;
+        }
+
+        .dtc-cta__stock strong.is-dropping {
+            animation: spotDrop 0.34s ease-out;
+        }
+
+        .dtc-cta__dot {
+            flex: none;
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background: #ef2626;
+            box-shadow: 0 0 0 0 rgba(239, 38, 38, 0.7);
+            animation: spotDot 1.6s ease-out infinite;
+        }
+
+        /* em telas estreitas as laterais encolhem para o texto do botão caber
+           em uma linha só (sem isso ele quebra a partir de ~375px) */
+        @media (max-width: 480px) {
+            .dtc-cta {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+            .dtc-cta__button {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+        }
+
+        @keyframes ctaPulse {
+            0%,
+            100% {
+                transform: scale(1);
+                box-shadow: 0 10px 22px rgba(21, 156, 72, 0.3);
+            }
+            50% {
+                transform: scale(1.035);
+                box-shadow: 0 18px 38px rgba(53, 212, 111, 0.55);
+            }
+        }
+
+        @keyframes ctaSheen {
+            0% {
+                left: -60%;
+            }
+            55%,
+            100% {
+                left: 125%;
+            }
+        }
+
+        @keyframes spotDot {
+            0% {
+                box-shadow: 0 0 0 0 rgba(239, 38, 38, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(239, 38, 38, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(239, 38, 38, 0);
+            }
+        }
+
+        /* uma vaga indo é uma queda curta com tom vermelho, não festa */
+        @keyframes spotDrop {
+            0% {
+                transform: translateY(-3px);
+                color: #d92626;
+            }
+            55% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(0);
+                color: #fbbf24;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .dtc-cta__button,
+            .dtc-cta__dot,
+            .dtc-cta__stock strong.is-dropping {
+                animation: none;
+            }
+            .dtc-cta__button {
+                box-shadow: 0 12px 24px rgba(21, 156, 72, 0.35);
+            }
+            .dtc-cta__button::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-bar">
+        Attention: This presentation is only available until <span id="current-date"></span>
+    </div>
+
+    <section class="hero">
+        <h1 class="hero__title">
+            <span class="hl">The Horse Soda Trick</span><br />Discovery Behind 3.4<br /> Inches in 9 Days
+        </h1>
+
+        <div class="hero__player">
+            <vturb-smartplayer id="vid-6adac2e2fa73d07c08addb69" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 177.77777777777777% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer> <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/528ac277-8029-4ec6-a3db-8da993dd5d9a/players/6adac2e2fa73d07c08addb69/v4/player.js", s.async=!0,document.head.appendChild(s); </script>
+        </div>
+
+        <!-- CTA fica entre o vídeo e o aviso. Se .dtc-cta-wrap receber
+             display:none, o aviso volta sozinho para logo abaixo do vídeo -->
+        <div class="dtc-cta-wrap">
+            <section class="dtc-cta" aria-label="Claim your spot">
+                <div class="cta">
+                    <!-- 🔗 LINK DO BOTÃO: troque o href abaixo pelo seu link de afiliado -->
+                    <a class="dtc-cta__button" href="https://order.wealthpay.io/sca1ml7aemkd?hid=b2lkPW9mZl82ODQ3NjgxJmFpZD1hZmZfMDU5NzY5NCZ1aWQ9YmxfMjk0MjYwMw%3D%3D&affid=aff_0597694" data-cta>
+                        <span>GET EREVANTON NOW ! 78% OFF</span>
+                    </a>
+                    <p class="dtc-cta__stock">
+                        <span class="dtc-cta__dot" aria-hidden="true"></span> Only <strong data-spots-left aria-live="polite">250</strong> spots left!
+                    </p>
+                </div>
+            </section>
+        </div>
+
+        <p class="hero__warning">
+            <span style="font-weight:400">☝️</span><b><i>THIS IS YOUR LAST CHANCE TO WATCH IT TO THE END.</i></b><span style="font-weight:400">☝️</span>
+        </p>
+    </section>
+
+
+    <script>
+        (function() {
+            var CFG = window.PAGE_CONFIG || {};
+
+            /* ----------------------------------------------------------------
+               Data de hoje na barra vermelha
+               ---------------------------------------------------------------- */
+            var hoje = new Date();
+            var elData = document.getElementById('current-date');
+            if (elData) {
+                elData.textContent = String(hoje.getMonth() + 1).padStart(2, '0') + '/' +
+                    String(hoje.getDate()).padStart(2, '0') + '/' + hoje.getFullYear();
+            }
+
+            /* ----------------------------------------------------------------
+               Título da aba piscando
+               ---------------------------------------------------------------- */
+            var titulos = CFG.TAB_TITLES;
+            if (titulos && titulos.length) {
+                var iTitulo = 0;
+                setInterval(function() {
+                    document.title = titulos[iTitulo];
+                    iTitulo = (iTitulo + 1) % titulos.length;
+                }, 1000);
+            }
+
+            /* ----------------------------------------------------------------
+               Toque/clique em qualquer lugar inicia o vídeo
+               ---------------------------------------------------------------- */
+            var jaClicou = false;
+
+            function clicarNoMeio() {
+                if (jaClicou) return;
+                jaClicou = true;
+                var x = window.innerWidth / 2,
+                    y = window.innerHeight / 2;
+                var alvo = document.elementFromPoint(x, y);
+                if (alvo) alvo.click();
+                document.dispatchEvent(new MouseEvent('click', {
+                    view: window,
+                    bubbles: true,
+                    cancelable: true,
+                    clientX: x,
+                    clientY: y
+                }));
+            }
+            document.addEventListener('touchstart', clicarNoMeio, {
+                once: true
+            });
+            document.addEventListener('click', clicarNoMeio, {
+                once: true
+            });
+
+            /* botão já visível: o contador de vagas começa no carregamento */
+            iniciarContador();
+
+            /* ----------------------------------------------------------------
+               "Only N spots left!" — começa a cair no carregamento da página
+               ---------------------------------------------------------------- */
+            function iniciarContador() {
+                var alvo = document.querySelector('[data-spots-left]');
+                if (!alvo) return;
+
+                var INICIO = parseInt(CFG.SPOTS_START, 10) || 250;
+                var PISO = parseInt(CFG.SPOTS_FLOOR, 10) || 9;
+                var PARADA = 12; /* daqui para baixo as vagas se arrastam */
+                var chave = 'spotsLeft' + INICIO;
+
+                var restam = (function() {
+                    try {
+                        var salvo = parseInt(sessionStorage.getItem(chave), 10);
+                        if (salvo >= PISO && salvo <= INICIO) return salvo;
+                    } catch (e) {}
+                    return INICIO;
+                })();
+                alvo.textContent = restam;
+
+                function proximoDelay() {
+                    var base;
+                    if (restam > 120) base = 960;
+                    else if (restam > 60) base = 1920;
+                    else if (restam > PARADA) base = 3600;
+                    else base = 25000 + (PARADA - restam) * 7000;
+                    return base + Math.random() * base * 0.8;
+                }
+
+                function proximoPasso() {
+                    if (restam > 120) return 3 + Math.floor(Math.random() * 3);
+                    if (restam > 60) return 2 + Math.floor(Math.random() * 2);
+                    if (restam > PARADA) return 1 + Math.floor(Math.random() * 2);
+                    return 1;
+                }
+
+                function tick() {
+                    if (restam <= PISO) return;
+                    var passo = proximoPasso();
+                    /* nunca pular o ponto de parada — as últimas vagas têm que ser vistas */
+                    if (restam > PARADA && restam - passo < PARADA) passo = restam - PARADA;
+                    restam = Math.max(PISO, restam - passo);
+                    try {
+                        sessionStorage.setItem(chave, restam);
+                    } catch (e) {}
+                    alvo.textContent = restam;
+                    alvo.classList.remove('is-dropping');
+                    void alvo.offsetWidth;
+                    alvo.classList.add('is-dropping');
+                    setTimeout(tick, proximoDelay());
+                }
+                setTimeout(tick, proximoDelay());
+            }
+        })();
+    </script>
+</body>
+
+</html>
